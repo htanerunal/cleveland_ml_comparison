@@ -77,7 +77,7 @@ model3_keras = KerasClassifier(build_fn=create_ANN_model, verbose=0, epochs=150,
 model3_keras._estimator_type = "classifier"
 
 # Define Stratified k-fold Cross Validation
-kf = StratifiedKFold(n_splits=10, shuffle=True, random_state=seed)
+kf = StratifiedKFold(n_splits=8, shuffle=True, random_state=seed)
 
 # Initialize scores for each classifier
 overall_score1 = []
