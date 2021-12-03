@@ -1,7 +1,7 @@
 # This file is created to compare ML Classifiers with NLC
 # Copyright (c) 2021 Hamit Taner Ünal and Prof.Fatih Başçiftçi
 
-# Classification Task for Pima Indian Diabetes
+# Classification Task for Cleveland Heart Disease Dataset
 
 import numpy as np
 import pandas as pd
