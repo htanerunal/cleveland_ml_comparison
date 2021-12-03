@@ -59,7 +59,7 @@ model3.add(Dense(1, activation="sigmoid"))
 model3.compile(optimizer='Nadam', loss='binary_crossentropy', metrics=['accuracy'])
 model4 = DecisionTreeClassifier(criterion='entropy',max_depth=5,max_features='log2',min_samples_leaf=9,min_samples_split=5)
 model5 = GaussianNB(var_smoothing=0.43287612810830584)
-model6 = KNeighborsClassifier(leaf_size=1, metric='minkowski',n_neighbors=19, p = 1,weights='distance')
+model6 = KNeighborsClassifier(leaf_size=1, metric='minkowski',n_neighbors=26, p = 2,weights='uniform')
 model7 = SVC(C=10,gamma=0.01,kernel='rbf')
 
 #Define model3 (ANN) as Keras Classifier
