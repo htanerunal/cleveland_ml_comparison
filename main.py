@@ -50,21 +50,21 @@ X = scaler.fit_transform(x)
 print("Using seed ",seed)
 
 # Define models to be used (with best hyperparameters)
-model1 = LogisticRegression(C=1, max_iter=100, penalty='l2',solver='newton-cg')
-model2 = RandomForestClassifier(n_estimators=400, criterion='entropy', max_depth=8, bootstrap = True, max_features = 'log2')
+model1 = LogisticRegression(C=0.0001, max_iter=100, penalty='l2',solver='liblinear')
+model2 = RandomForestClassifier(n_estimators=300, criterion='gini', max_depth=6, bootstrap = True, max_features = 'log2')
 model3 = Sequential()
 model3.add(Dense(9, input_dim=X.shape[1], activation='relu'))
 model3.add(Dense(3, activation='relu'))
 model3.add(Dense(1, activation="sigmoid"))
-model3.compile(optimizer='Nadam', loss='binary_crossentropy', metrics=['accuracy'])
-model4 = DecisionTreeClassifier(criterion='entropy',max_depth=5,max_features='log2',min_samples_leaf=9,min_samples_split=5)
-model5 = GaussianNB(var_smoothing=0.43287612810830584)
-model6 = KNeighborsClassifier(leaf_size=1, metric='minkowski',n_neighbors=26, p = 2,weights='uniform')
-model7 = SVC(C=10,gamma=0.01,kernel='rbf')
+model3.compile(optimizer='Adam', loss='binary_crossentropy', metrics=['accuracy'])
+model4 = DecisionTreeClassifier(criterion='gini',max_depth=5,max_features='sqrt',min_samples_leaf=9,min_samples_split=6)
+model5 = GaussianNB(var_smoothing=0.533669923120631)
+model6 = KNeighborsClassifier(leaf_size=1, metric='minkowski',n_neighbors=14, p = 2,weights='uniform')
+model7 = SVC(C=100,gamma=0.001,kernel='rbf')
 
 #Define model3 (ANN) as Keras Classifier
 # Prepare for ANN
-def create_ANN_model(optimizer='Nadam'):
+def create_ANN_model(optimizer='Adam'):
     model = Sequential()
     model.add(Dense(9, input_dim=X.shape[1], activation='relu'))
     model.add(Dense(3, activation='relu'))
@@ -73,7 +73,7 @@ def create_ANN_model(optimizer='Nadam'):
     model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
     return model
 
-model3_keras = KerasClassifier(build_fn=create_ANN_model, verbose=0, epochs=150, batch_size=10)
+model3_keras = KerasClassifier(build_fn=create_ANN_model, verbose=0, epochs=100, batch_size=50)
 model3_keras._estimator_type = "classifier"
 
 # Define Stratified k-fold Cross Validation
